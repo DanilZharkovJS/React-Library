@@ -7,12 +7,12 @@ function BookList() {
   return (
     <div>
       <h2>Book list</h2>
-      {books.length === 0 ? (
+      {!books.length ? (
         <p>No books available</p>
       ) : (
         <ul>
           {books.map((book, i) => (
-            <li key={i}>
+            <li key={book.id}>
               {++i}. {book.title} by <strong>{book.author}</strong>
             </li>
           ))}

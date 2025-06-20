@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addBook } from '../../../redux/books/actionCreators'
 import Input from '../../../components/Input'
+import generateId16 from '../../../utils/randomId16'
+import {v4 as id16} from 'uuid'
+
 
 function BookForm() {
   const [title, setTitle] = useState('')
@@ -14,6 +17,7 @@ function BookForm() {
       const book = {
         title,
         author,
+        id: id16(),
       }
       dispatch(addBook(book))
       setTitle('')
