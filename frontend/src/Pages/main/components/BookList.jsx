@@ -1,8 +1,14 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import Button from '../../../components/Button'
+import { deleteBook } from '../../../redux/books/actionCreators'
 
 function BookList() {
   const books = useSelector((state) => state.books)
+  const dispatch = useDispatch()
+  const handleDelete = (id) => {
+    dispatch(deleteBook(id))
+  }
 
   return (
     <div>
@@ -12,9 +18,12 @@ function BookList() {
       ) : (
         <ul>
           {books.map((book, i) => (
-            <li key={book.id}>
-              {++i}. {book.title} by <strong>{book.author}</strong>
-            </li>
+            <div key={book.id}>
+              <li>
+                {++i}. {book.title} by <strong>{book.author}</strong>
+                <Button onClick={() => handleDelete(book.id)}>Delete</Button>
+              </li>
+            </div>
           ))}
         </ul>
       )}
