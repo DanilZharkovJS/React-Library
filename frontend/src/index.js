@@ -11,3 +11,11 @@ root.render(
         <App />
     </Provider>
 )
+let num = 1
+const vanya = 'vanya pedik'
+const vanyaa = 'vanya pedik'
+while (num < 100) {
+    num++
+    console.log(vanya)
+    console.log(vanyaa)
+}
