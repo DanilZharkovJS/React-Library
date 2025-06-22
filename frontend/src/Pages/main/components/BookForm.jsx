@@ -5,6 +5,7 @@ import { addBook } from '../../../redux/books/actionCreators'
 import Input from '../../../components/Input'
 import Button from '../../../components/Button'
 import booksData from '../data/books.json'
+import bookWithId from '../../../utils/bookWithId'
 
 
 function BookForm() {
@@ -15,13 +16,7 @@ function BookForm() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (title && author) {
-      const book = {
-        title,
-        author,
-        id: id16(),
-        isFavorite: false,
-      }
-      dispatch(addBook(book))
+      dispatch(addBook(bookWithId({title, author})))
       setTitle('')
       setAuthor('')
     }
@@ -29,29 +24,24 @@ function BookForm() {
   const handleRandomBook = () => {
     const randomIndex = Math.floor(Math.random() * booksData.length)
     const randomBook = booksData[randomIndex]
-    const randomBookWithId = {
-      ...randomBook,
-      id: id16(),
-      isFavorite: false,
-    }
-    dispatch(addBook(randomBookWithId))
+    dispatch(addBook(bookWithId(randomBook)))
   }
 
   return (
-    <div>
-      <div className="book-form-container">
+    <div className="book-form-container">
+      <div>
         <h2>Add a book</h2>
         <form onSubmit={handleSubmit} className="book-form">
           <Input
             placeholder="Title"
-            maxLength={40}
+            maxLength={20}
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <Input
             placeholder="Author"
-            maxLength={20}
+            maxLength={15}
             type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
