@@ -1,11 +1,12 @@
 
-function Input({ value, type = 'text', onChange, placeholder }) {
+function Input({ value, type = 'text', onChange, placeholder, maxLength }) {
   return (
     <input
       type={type}
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      maxLength={maxLength}
     />
   )
 }

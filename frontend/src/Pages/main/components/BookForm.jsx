@@ -19,6 +19,7 @@ function BookForm() {
         title,
         author,
         id: id16(),
+        isFavorite: false,
       }
       dispatch(addBook(book))
       setTitle('')
@@ -31,6 +32,7 @@ function BookForm() {
     const randomBookWithId = {
       ...randomBook,
       id: id16(),
+      isFavorite: false,
     }
     dispatch(addBook(randomBookWithId))
   }
@@ -42,12 +44,14 @@ function BookForm() {
         <form onSubmit={handleSubmit} className="book-form">
           <Input
             placeholder="Title"
+            maxLength={40}
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <Input
             placeholder="Author"
+            maxLength={20}
             type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
