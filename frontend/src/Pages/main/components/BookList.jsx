@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { IoBookmarkOutline, IoBookmarkSharp } from 'react-icons/io5'
 import Button from '../../../components/Button'
 import { deleteBook, toggleFavorite } from '../../../redux/books/actionCreators'
-import { titleFilter } from '../../../redux/slices/filterSlice'
+import { selectAuthorFilter, selectTitleFilter } from '../../../redux/slices/filterSlice'
 
 function BookList() {
   const books = useSelector((state) => state.books)
-  const bookTitleFilter = useSelector(titleFilter)
+  const bookTitleFilter = useSelector(selectTitleFilter)
+  const bookAuthorFilter = useSelector(selectAuthorFilter)
   const dispatch = useDispatch()
 
   const handleDelete = (id) => {
@@ -22,7 +23,11 @@ function BookList() {
     const matchesTitle = book.title
       .toLowerCase()
       .includes(bookTitleFilter.toLowerCase())
-    return matchesTitle
+    const matchesAuthor = book.author
+      .toLowerCase()
+      .includes(bookAuthorFilter.toLowerCase())
+
+    return matchesTitle && matchesAuthor
   })
 
   return (
