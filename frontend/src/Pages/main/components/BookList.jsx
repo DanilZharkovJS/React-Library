@@ -16,13 +16,8 @@ function BookList() {
   const bookFavoriteFilter = useSelector(selectFavoriteFilter)
   const dispatch = useDispatch()
 
-  const handleDelete = (id) => {
-    dispatch(deleteBook(id))
-  }
-
-  const handleToggleFavorite = (id) => {
-    dispatch(toggleFavorite(id))
-  }
+  const handleDelete = (id) => dispatch(deleteBook(id))
+  const handleToggleFavorite = (id) => dispatch(toggleFavorite(id))
 
   const filteredBooks = books.filter((book) => {
     const matchesTitle = book.title
@@ -32,9 +27,20 @@ function BookList() {
       .toLowerCase()
       .includes(bookAuthorFilter.toLowerCase())
     const matchesFavorite = bookFavoriteFilter ? book.isFavorite : true
-
     return matchesTitle && matchesAuthor && matchesFavorite
   })
+
+  const highlightMatch = (text, filter) => {
+    if (!filter) return text
+    const parts = text.split(new RegExp(`(${filter})`, 'gi'))
+    return parts.map((part, i) =>
+      part.toLowerCase() === filter.toLowerCase() ? (
+        <mark key={i}>{part}</mark>
+      ) : (
+        part
+      )
+    )
+  }
 
   return (
     <div>
@@ -42,28 +48,23 @@ function BookList() {
       {!filteredBooks.length ? (
         <p>No books available</p>
       ) : (
-        <ul>
-          <div className="single-book-container">
-            {filteredBooks.map((book, i) => (
-              <div key={book.id} className="book">
-                <li>
-                  {++i}. {book.title} by <strong>{book.author}</strong>
-                  <div className="actions">
-                    <span onClick={() => handleToggleFavorite(book.id)}>
-                      {book.isFavorite ? (
-                        <IoBookmarkSharp className="favorite-icon" />
-                      ) : (
-                        <IoBookmarkOutline className="favorite-icon" />
-                      )}
-                    </span>
-                    <Button onClick={() => handleDelete(book.id)}>
-                      Delete
-                    </Button>
-                  </div>
-                </li>
+        <ul className="single-book-container">
+          {filteredBooks.map((book, i) => (
+            <li key={book.id} className="book">
+              {++i}. {highlightMatch(book.title, bookTitleFilter)} by{' '}
+              <strong>{highlightMatch(book.author, bookAuthorFilter)}</strong>
+              <div className="actions">
+                <span onClick={() => handleToggleFavorite(book.id)}>
+                  {book.isFavorite ? (
+                    <IoBookmarkSharp className="favorite-icon" />
+                  ) : (
+                    <IoBookmarkOutline className="favorite-icon" />
+                  )}
+                </span>
+                <Button onClick={() => handleDelete(book.id)}>Delete</Button>
               </div>
-            ))}
-          </div>
+            </li>
+          ))}
         </ul>
       )}
     </div>
