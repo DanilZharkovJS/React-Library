@@ -15,7 +15,7 @@ const filterSlice = createSlice({
     setFavoriteFilter: (state, action) => {
       state.favorities = action.payload
     },
-    clearFilters: (state) => {
+    clearFilters: () => {
       return initialState
     },
   },

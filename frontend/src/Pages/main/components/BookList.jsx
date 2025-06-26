@@ -2,7 +2,10 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IoBookmarkOutline, IoBookmarkSharp } from 'react-icons/io5'
 import Button from '../../../components/Button'
-import { deleteBook, toggleFavorite } from '../../../redux/books/actionCreators'
+import {
+  setDeleteBook,
+  setToggleFavorite,
+} from '../../../redux/slices/booksSlice'
 import {
   selectAuthorFilter,
   selectFavoriteFilter,
@@ -16,8 +19,8 @@ function BookList() {
   const bookFavoriteFilter = useSelector(selectFavoriteFilter)
   const dispatch = useDispatch()
 
-  const handleDelete = (id) => dispatch(deleteBook(id))
-  const handleToggleFavorite = (id) => dispatch(toggleFavorite(id))
+  const handleDelete = (id) => dispatch(setDeleteBook(id))
+  const handleToggleFavorite = (id) => dispatch(setToggleFavorite(id))
 
   const filteredBooks = books.filter((book) => {
     const matchesTitle = book.title
@@ -51,7 +54,7 @@ function BookList() {
         <ul className="single-book-container">
           {filteredBooks.map((book, i) => (
             <li key={book.id} className="book">
-              {++i}. {highlightMatch(book.title, bookTitleFilter)} by{' '}
+              {++i}. {highlightMatch(book.title, bookTitleFilter)} -
               <strong>{highlightMatch(book.author, bookAuthorFilter)}</strong>
               <div className="actions">
                 <span onClick={() => handleToggleFavorite(book.id)}>
