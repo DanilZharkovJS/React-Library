@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { IoBookmarkOutline, IoBookmarkSharp } from 'react-icons/io5'
 import Button from '../../../components/Button'
 import {
+  selectAllBooks,
   setDeleteBook,
   setToggleFavorite,
 } from '../../../redux/slices/booksSlice'
@@ -13,7 +14,7 @@ import {
 } from '../../../redux/slices/filterSlice'
 
 function BookList() {
-  const books = useSelector((state) => state.books)
+  const books = useSelector(selectAllBooks)
   const bookTitleFilter = useSelector(selectTitleFilter)
   const bookAuthorFilter = useSelector(selectAuthorFilter)
   const bookFavoriteFilter = useSelector(selectFavoriteFilter)
