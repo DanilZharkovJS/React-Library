@@ -29,7 +29,7 @@ function BookForm() {
     dispatch(setAddBook(bookWithId(randomBook, 'random')))
   }
   const handleRandomBookAPI = () => {
-    dispatch(fetchBook())
+    dispatch(fetchBook('http://localhost:5000/random-book'))
   }
 
   return (
