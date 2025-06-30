@@ -11,7 +11,6 @@ body {
 header {
   justify-self: center;
   font-size: 20px;
-
 }
 
 .book-container {
@@ -27,7 +26,7 @@ header {
   background-color: #fff;
   padding: 2.5rem;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   flex: 1;
 }
 
@@ -48,7 +47,6 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 1.3rem;
-  
 }
 
 .book-form input {
@@ -150,8 +148,8 @@ ul {
 /* Custom toast appearance */
 .custom-toast {
   border-radius: 8px;
-  background: #fff5f5 !important;       /* Очень светлый красный фон */
-  color: #a70000 !important;             /* Тёмно-красный текст */
+  background: #fff5f5 !important; /* Очень светлый красный фон */
+  color: #a70000 !important; /* Тёмно-красный текст */
   box-shadow: 0 4px 10px rgba(167, 0, 0, 0.2) !important;
   border-left: 6px solid #d32f2f !important; /* Ярко-красный бордер */
   padding: 12px 16px !important;
@@ -168,4 +166,21 @@ ul {
   background: #d32f2f !important; /* Красный прогресс-бар */
   height: 4px !important;
   border-radius: 0 0 8px 8px !important;
+}
+.API_btn {
+  align-items: center;
+}
+.API_btn-block {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.spinner-icon {
+  margin: 0 10px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

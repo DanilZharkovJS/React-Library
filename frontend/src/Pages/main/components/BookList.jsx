@@ -24,14 +24,14 @@ function BookList() {
   const handleToggleFavorite = (id) => dispatch(setToggleFavorite(id))
 
   const filteredBooks = books.filter((book) => {
-    const matchesTitle = book.title
+    const titleMatch = book.title
       .toLowerCase()
       .includes(bookTitleFilter.toLowerCase())
-    const matchesAuthor = book.author
+    const authorMatch = book.author
       .toLowerCase()
       .includes(bookAuthorFilter.toLowerCase())
-    const matchesFavorite = bookFavoriteFilter ? book.isFavorite : true
-    return matchesTitle && matchesAuthor && matchesFavorite
+    const favoriteMatch = bookFavoriteFilter ? book.isFavorite : true
+    return titleMatch && authorMatch && favoriteMatch
   })
 
   const highlightMatch = (text, filter) => {
@@ -56,8 +56,8 @@ function BookList() {
           {filteredBooks.map((book, i) => (
             <li key={book.id} className="book">
               {++i}. {highlightMatch(book.title, bookTitleFilter)} -
-              <strong>{highlightMatch(book.author, bookAuthorFilter)}</strong>
-              ({book.source})
+              <strong>{highlightMatch(book.author, bookAuthorFilter)}</strong>(
+              {book.source})
               <div className="actions">
                 <span onClick={() => handleToggleFavorite(book.id)}>
                   {book.isFavorite ? (
