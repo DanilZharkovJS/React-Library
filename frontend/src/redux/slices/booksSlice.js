@@ -26,13 +26,17 @@ const booksSlice = createSlice({
       }
     },
   },
-  extraReducers: builder =>  {
-    builder.addCase(fetchBook.fulfilled, (state, action) => {
-      if (action.payload.title && action.payload.author) {
-        state.push(bookWithId(action.payload, 'API'))
-     }
-    })
-  }
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchBook.fulfilled, (state, action) => {
+        if (action.payload.title && action.payload.author) {
+          state.push(bookWithId(action.payload, 'API'))
+        }
+      })
+      .addCase(fetchBook.rejected, (state, action) => {
+        console.error('Ошибка при загрузке книги:', action.error.message)
+      })
+  },
 })
 
 export const { setAddBook, setDeleteBook, setToggleFavorite } =

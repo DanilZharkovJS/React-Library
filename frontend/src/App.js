@@ -1,5 +1,6 @@
 import './App.css'
 import H1 from './components/H1'
+import Error from './pages/main/components/Error'
 import MainPage from './pages/main/MainPage'
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <div className='app-body'>
         <MainPage />
       </div>
+      <Error />
     </div>
   )
 }

@@ -5,7 +5,8 @@ import Input from '../../../components/Input'
 import Button from '../../../components/Button'
 import booksData from '../data/books.json'
 import bookWithId from '../../../utils/bookWithId'
-import { fetchBook, setAddBook, thunkFunction } from '../../../redux/slices/booksSlice'
+import { fetchBook, setAddBook } from '../../../redux/slices/booksSlice'
+import { setError } from '../../../redux/slices/errorSlice'
 
 function BookForm() {
   const [title, setTitle] = useState('')
@@ -18,6 +19,8 @@ function BookForm() {
       dispatch(setAddBook(bookWithId({ title, author }, 'manual')))
       setTitle('')
       setAuthor('')
+    } else {
+      dispatch(setError('You must fill title and author'))
     }
   }
   const handleRandomBook = () => {
