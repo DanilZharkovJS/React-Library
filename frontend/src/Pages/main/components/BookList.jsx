@@ -4,6 +4,7 @@ import { IoBookmarkOutline, IoBookmarkSharp } from 'react-icons/io5'
 import Button from '../../../components/Button'
 import {
   selectAllBooks,
+  setDeleteAllBooks,
   setDeleteBook,
   setToggleFavorite,
 } from '../../../redux/slices/booksSlice'
@@ -45,10 +46,18 @@ function BookList() {
       )
     )
   }
+  const handleDelAll = () => {
+    dispatch(setDeleteAllBooks())
+  }
 
   return (
-    <div>
+    <div className="book-list">
       <h2>Book list</h2>
+      {filteredBooks.length ? (
+        <Button onClick={handleDelAll} className="delete-all-btn">
+          DELETE ALL
+        </Button>
+      ) : null}
       {!filteredBooks.length ? (
         <p>No books available</p>
       ) : (
